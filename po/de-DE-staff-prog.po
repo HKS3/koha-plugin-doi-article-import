@@ -1,0 +1,87 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: koha-plugin-doi-article-import 0.1.0\n"
+"POT-Creation-Date: 2026-09-04 00:00+0000\n"
+"PO-Revision-Date: 2026-09-04 00:00+0000\n"
+"Last-Translator: HKS3 <support@koha-support.eu>\n"
+"Language-Team: German\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "DOI Article Import"
+msgstr "DOI-Artikelimport"
+
+msgid "Configure DOI Article Import"
+msgstr "DOI-Artikelimport konfigurieren"
+
+msgid "Crossref email address is missing. Please configure the plugin first."
+msgstr "Crossref-Mailadresse fehlt. Bitte das Plugin zuerst konfigurieren."
+
+msgid "Framework"
+msgstr "Framework"
+
+msgid "942$c"
+msgstr "942$c"
+
+msgid "Load DOI"
+msgstr "DOI laden"
+
+msgid "Possible duplicates for this DOI:"
+msgstr "Mögliche Dubletten mit dieser DOI:"
+
+msgid "Bibliographic record created:"
+msgstr "Katalogisat angelegt:"
+
+msgid "Preview"
+msgstr "Vorschau"
+
+msgid "Author names"
+msgstr "Verfassernamen"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Subtitle"
+msgstr "Zusatztitel"
+
+msgid "Publication year"
+msgstr "Erscheinungsjahr"
+
+msgid "Journal title"
+msgstr "Zeitschriftentitel"
+
+msgid "Volume"
+msgstr "Jahrgang"
+
+msgid "Issue"
+msgstr "Heftnummer"
+
+msgid "Pages"
+msgstr "Seitenangaben"
+
+msgid "Abstract"
+msgstr "Abstract"
+
+msgid "Create anyway"
+msgstr "Trotzdem anlegen"
+
+msgid "Create bibliographic record"
+msgstr "Katalogisat anlegen"
+
+msgid "Fallback from koha-plugin-api-crossref is available."
+msgstr "Fallback aus koha-plugin-api-crossref vorhanden."
+
+msgid "Crossref email address"
+msgstr "Crossref-Mailadresse"
+
+msgid "Default framework"
+msgstr "Standard-Framework"
+
+msgid "Default value for 942$c"
+msgstr "Standardwert für 942$c"
+
+msgid "Save"
+msgstr "Speichern"

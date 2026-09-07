@@ -1,0 +1,87 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: koha-plugin-doi-article-import 0.1.0\n"
+"POT-Creation-Date: 2026-09-04 00:00+0000\n"
+"PO-Revision-Date: 2026-09-04 00:00+0000\n"
+"Last-Translator: HKS3 <support@koha-support.eu>\n"
+"Language-Team: English\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "DOI Article Import"
+msgstr "DOI Article Import"
+
+msgid "Configure DOI Article Import"
+msgstr "Configure DOI Article Import"
+
+msgid "Crossref email address is missing. Please configure the plugin first."
+msgstr "Crossref email address is missing. Please configure the plugin first."
+
+msgid "Framework"
+msgstr "Framework"
+
+msgid "942$c"
+msgstr "942$c"
+
+msgid "Load DOI"
+msgstr "Load DOI"
+
+msgid "Possible duplicates for this DOI:"
+msgstr "Possible duplicates for this DOI:"
+
+msgid "Bibliographic record created:"
+msgstr "Bibliographic record created:"
+
+msgid "Preview"
+msgstr "Preview"
+
+msgid "Author names"
+msgstr "Author names"
+
+msgid "Title"
+msgstr "Title"
+
+msgid "Subtitle"
+msgstr "Subtitle"
+
+msgid "Publication year"
+msgstr "Publication year"
+
+msgid "Journal title"
+msgstr "Journal title"
+
+msgid "Volume"
+msgstr "Volume"
+
+msgid "Issue"
+msgstr "Issue"
+
+msgid "Pages"
+msgstr "Pages"
+
+msgid "Abstract"
+msgstr "Abstract"
+
+msgid "Create anyway"
+msgstr "Create anyway"
+
+msgid "Create bibliographic record"
+msgstr "Create bibliographic record"
+
+msgid "Fallback from koha-plugin-api-crossref is available."
+msgstr "Fallback from koha-plugin-api-crossref is available."
+
+msgid "Crossref email address"
+msgstr "Crossref email address"
+
+msgid "Default framework"
+msgstr "Default framework"
+
+msgid "Default value for 942$c"
+msgstr "Default value for 942$c"
+
+msgid "Save"
+msgstr "Save"

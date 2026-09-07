@@ -1,0 +1,166 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% t('DOI Article Import') | html %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="tools_plugins" class="tools">
+[% INCLUDE 'header.inc' %]
+[% INCLUDE 'cat-search.inc' %]
+
+<div id="breadcrumbs">
+    <a href="/cgi-bin/koha/mainpage.pl">[% t('Home') | html %]</a>
+    &rsaquo; <a href="/cgi-bin/koha/plugins/plugins-home.pl">[% t('Plugins') | html %]</a>
+    &rsaquo; [% t('DOI Article Import') | html %]
+</div>
+
+<div class="main container-fluid">
+    <div class="row">
+        <div class="col-sm-10 col-sm-push-2">
+            <main>
+                <h1>[% t('DOI Article Import') | html %]</h1>
+
+                [% IF !has_configured_email %]
+                    <div class="alert alert-warning">
+                        [% t('Crossref email address is missing. Please configure the plugin first.') | html %]
+                    </div>
+                [% END %]
+
+                [% IF errors.size %]
+                    <div class="alert alert-danger">
+                        <ul>
+                            [% FOREACH error IN errors %]
+                                <li>[% error | html %]</li>
+                            [% END %]
+                        </ul>
+                    </div>
+                [% END %]
+
+                <div class="page-section">
+                    <form method="post" action="/cgi-bin/koha/plugins/run.pl" class="form-horizontal">
+                        [% INCLUDE 'csrf-token.inc' %]
+                        <input type="hidden" name="class" value="[% plugin_class | html %]" />
+                        <input type="hidden" name="method" value="tool" />
+                        <input type="hidden" name="op" value="cud-preview" />
+
+                        <fieldset class="rows">
+                            <ol>
+                                <li>
+                                    <label for="doi" class="required">DOI</label>
+                                    <input id="doi" name="doi" class="focus" type="text" size="60" value="[% doi | html %]" required="required" />
+                                </li>
+                                <li>
+                                    <label for="frameworkcode">[% t('Framework') | html %]</label>
+                                    <select id="frameworkcode" name="frameworkcode">
+                                        [% FOREACH framework IN frameworks %]
+                                            <option value="[% framework.frameworkcode | html %]" [% IF framework.frameworkcode == frameworkcode %]selected="selected"[% END %]>[% framework.frameworktext | html %] ([% framework.frameworkcode | html %])</option>
+                                        [% END %]
+                                    </select>
+                                </li>
+                                <li>
+                                    <label for="itemtype">[% t('942$c') | html %]</label>
+                                    <input id="itemtype" name="itemtype" type="text" size="10" value="[% itemtype | html %]" />
+                                </li>
+                            </ol>
+                        </fieldset>
+
+                        <fieldset class="action">
+                            <button class="btn btn-primary" type="submit">[% t('Load DOI') | html %]</button>
+                        </fieldset>
+                    </form>
+                </div>
+
+                [% IF article %]
+                    [% IF warnings.size %]
+                        <div class="alert alert-warning">
+                            <ul>
+                                [% FOREACH warning IN warnings %]
+                                    <li>[% warning | html %]</li>
+                                [% END %]
+                            </ul>
+                        </div>
+                    [% END %]
+
+                    [% IF duplicates.size %]
+                        <div class="alert alert-warning">
+                            <p>[% t('Possible duplicates for this DOI:') | html %]</p>
+                            <ul>
+                                [% FOREACH duplicate IN duplicates %]
+                                    <li>
+                                        <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% duplicate.biblionumber | uri %]">[% duplicate.biblionumber | html %]</a>
+                                        [% duplicate.author | html %] [% duplicate.title | html %]
+                                    </li>
+                                [% END %]
+                            </ul>
+                        </div>
+                    [% END %]
+
+                    [% IF created_biblionumber %]
+                        <div class="alert alert-success">
+                            [% t('Bibliographic record created:') | html %]
+                            <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% created_biblionumber | uri %]">[% created_biblionumber | html %]</a>
+                        </div>
+                    [% END %]
+
+                    <div class="page-section">
+                        <h2>[% t('Preview') | html %]</h2>
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr><th>DOI</th><td>[% article.doi | html %]</td></tr>
+                                <tr>
+                                    <th>[% t('Author names') | html %]</th>
+                                    <td>
+                                        [% FOREACH author IN article.authors %]
+                                            [% author.display_name | html %][% UNLESS loop.last %]; [% END %]
+                                        [% END %]
+                                    </td>
+                                </tr>
+                                <tr><th>[% t('Title') | html %]</th><td>[% article.title | html %]</td></tr>
+                                <tr><th>[% t('Subtitle') | html %]</th><td>[% article.subtitle | html %]</td></tr>
+                                <tr><th>[% t('Publication year') | html %]</th><td>[% article.year | html %]</td></tr>
+                                <tr><th>[% t('Journal title') | html %]</th><td>[% article.journal_title | html %]</td></tr>
+                                <tr><th>[% t('Volume') | html %]</th><td>[% article.volume | html %]</td></tr>
+                                <tr><th>[% t('Issue') | html %]</th><td>[% article.issue | html %]</td></tr>
+                                <tr><th>[% t('Pages') | html %]</th><td>[% article.pages | html %]</td></tr>
+                                <tr><th>[% t('Abstract') | html %]</th><td>[% article.abstract | html %]</td></tr>
+                                <tr><th>ISSN</th><td>[% article.issn | html %]</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="page-section">
+                        <h2>MARCXML</h2>
+                        <textarea class="form-control" rows="18" cols="120" readonly="readonly">[% marcxml | html %]</textarea>
+                    </div>
+
+                    [% IF !created_biblionumber %]
+                        <div class="page-section">
+                            <form method="post" action="/cgi-bin/koha/plugins/run.pl">
+                                [% INCLUDE 'csrf-token.inc' %]
+                                <input type="hidden" name="class" value="[% plugin_class | html %]" />
+                                <input type="hidden" name="method" value="tool" />
+                                <input type="hidden" name="op" value="cud-create" />
+                                <input type="hidden" name="doi" value="[% doi | html %]" />
+                                <input type="hidden" name="frameworkcode" value="[% frameworkcode | html %]" />
+                                <input type="hidden" name="itemtype" value="[% itemtype | html %]" />
+                                [% IF duplicates.size %]
+                                    <input type="hidden" name="confirm_duplicate" value="1" />
+                                [% END %]
+                                <fieldset class="action">
+                                    <button class="btn btn-primary" type="submit" [% UNLESS can_create %]disabled="disabled"[% END %]>
+                                        [% IF duplicates.size %][% t('Create anyway') | html %][% ELSE %][% t('Create bibliographic record') | html %][% END %]
+                                    </button>
+                                </fieldset>
+                            </form>
+                        </div>
+                    [% END %]
+                [% END %]
+            </main>
+        </div>
+        <div class="col-sm-2 col-sm-pull-10">
+            [% INCLUDE 'tools-menu.inc' %]
+        </div>
+    </div>
+</div>
+
+[% INCLUDE 'intranet-bottom.inc' %]
