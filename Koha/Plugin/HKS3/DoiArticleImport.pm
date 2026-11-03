@@ -392,17 +392,20 @@ sub find_existing_doi_biblios {
 
     return $dbh->selectall_arrayref(
         q{
-            SELECT b.biblionumber, b.title, b.author
-            FROM biblio_metadata bm
-            JOIN biblio b ON b.biblionumber = bm.biblionumber
-            WHERE bm.metadata LIKE ?
-               OR bm.metadata LIKE ?
-            ORDER BY b.biblionumber
+            SELECT biblionumber, title, author
+            FROM biblio
+            WHERE biblionumber IN (
+                SELECT DISTINCT(biblionumber)
+                FROM nm2db_v_record
+                WHERE value = ?
+                   OR value = ?
+            )
+            ORDER BY biblionumber
             LIMIT 20
         },
         { Slice => {} },
-        '%' . $doi . '%',
-        '%' . $doi_url . '%',
+        $doi,
+        $doi_url,
     );
 }
 
