@@ -19,7 +19,7 @@ use MARC::Record;
 use POSIX qw(strftime);
 use URI::Escape qw(uri_escape_utf8);
 
-our $VERSION = '0.1.0';
+our $VERSION = '0.1.1';
 
 our $metadata = {
     name            => 'DOI Article Import',
@@ -27,7 +27,7 @@ our $metadata = {
     description     => 'Import article metadata from Crossref DOI records into Koha MARC21',
     namespace       => 'doi_article_import',
     date_authored   => '2026-09-03',
-    date_updated    => '2026-09-04',
+    date_updated    => '2026-11-03',
     minimum_version => '23.11',
     maximum_version => undef,
     version         => $VERSION,
